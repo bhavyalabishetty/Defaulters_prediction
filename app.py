@@ -4,15 +4,10 @@ import pickle
 import numpy as np
 from flask import Flask, request
 
-model = None
 app = Flask(__name__)
 
-
-def load_model():
-    global model
-    # model variable refers to the global variable
-    with open('defaulters_trained_model.pkl', 'rb') as f:
-        model = pickle.load(f)
+# read our pickle file and label our final GBM model as model
+model = pickle.load(open('defaulters_trained_model.pkl', 'rb'))
 
 
 @app.route('/')
