@@ -20,12 +20,11 @@ def get_prediction():
     # Works only for a single sample
     if request.method == 'POST':
         data = request.get_json()  # Get data posted as a json
-        data = pd.DataFrame(data)  # converts shape from (x,) to (1, x)
+        data = np.array(data)[np.newaxis, :]  # converts shape from (x,) to (1, x)
         prediction = model.predict_proba(data)  # runs globally loaded model on the data
     return str(prediction[:,1])
 
 
 if __name__ == '__main__':
-    #load_model()  # load model at the beginning once only
     app.run(debug = True)
         
